@@ -53,4 +53,10 @@ router.post('/assinar', async (req, res) => {
   await fs.writeFileSync('src/database.json', JSON.stringify(documento));
 })
 
+router.get('/banco', async (req, res) =>{
+  const documento = await fs.readFileSync('src/database.json', 'utf8');
+  let doc = JSON.parse(documento);
+  return res.status(200).send(doc);
+})
+
 module.exports = router
