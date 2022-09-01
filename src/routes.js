@@ -49,8 +49,8 @@ router.post('/modelos', async (req, res) => {
 router.post('/assinar', async (req, res) => {
   const documento = await fs.readFileSync('src/database.json', 'utf8');
   let doc = JSON.parse(documento);
-  documento.assinado = true;
-  await fs.writeFileSync('src/database.json', JSON.stringify(documento));
+  doc.assinado = true;
+  await fs.writeFileSync('src/database.json', JSON.stringify(doc));
 })
 
 router.get('/banco', async (req, res) =>{
