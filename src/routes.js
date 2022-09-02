@@ -77,6 +77,9 @@ router.post('/signer', async (req, res) =>{
     url = res.list.url;
     status = res.status;
   })
+  .catch((error) => {
+    return res.status(error.response.status).send(error.response.data)
+  });
   doc.url = url;
   await fs.writeFile('src/database.json', JSON.stringify(doc), (err) => {
     if(err) throw err;
