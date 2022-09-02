@@ -47,7 +47,7 @@ router.post('/modelos', async (req, res) => {
 })
 
 router.post('/assinar', async (req, res) => {
-  let documento; 
+  let documento = "texto"; 
   await fs.readFile('src/database.json', 'utf8', (err, data) =>{
     if(err){
       throw err;
