@@ -67,4 +67,23 @@ router.get('/banco', async (req, res) =>{
   return res.status(200).send(doc);
 })
 
+router.post('/signer', async (req, res) =>{
+  const documento = await fs.readFileSync('src/database.json', 'utf8');
+  let doc = JSON.parse(documento);
+  let url;
+  let status;
+  await axios.post(`https://sandbox.clicksign.com/api/v1/lists?access_token=${process.env.APIKEY}`, req.body)
+  .then((res) => {
+    url = res.list.url;
+    status = res.status;
+  })
+  doc.url = url;
+  await fs.writeFile('src/database.json', JSON.stringify(doc), (err) => {
+    if(err) throw err;
+    console.log("arquivo salvo");
+  });
+
+  return res.status(status).send(doc);
+})
+
 module.exports = router
