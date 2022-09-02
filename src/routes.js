@@ -47,12 +47,23 @@ router.post('/modelos', async (req, res) => {
 })
 
 router.post('/assinar', async (req, res) => {
-  const documento = fs.readFile('src/database.json', 'utf8');
+  let documento; 
+  await fs.readFile('src/database.json', 'utf8', (err, data) =>{
+    if(err){
+      throw err;
+    }
+    documento = data;
+    console.log("dados obtidos");
+  });
   const signer = req.body.event.data.signer
   let doc = JSON.parse(documento);
   doc.assinado = true;
   doc.signer = signer;
-  fs.writeFile('src/database.json', JSON.stringify(doc));
+  await fs.writeFile('src/database.json', JSON.stringify(doc), (err) => {
+    if(err) throw err;
+    console.log("arquivo salvo");
+  });
+
   return res.status(200);
 })
 
