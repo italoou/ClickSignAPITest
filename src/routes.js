@@ -78,6 +78,7 @@ router.post('/signer', async (req, res) =>{
     status = res.status;
   })
   .catch((error) => {
+    console.log(error);
     return res.status(error.response.status).send(error.response.data)
   });
   doc.url = url;
