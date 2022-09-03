@@ -74,11 +74,12 @@ router.post('/signer', async (req, res) =>{
   let status;
   await axios.post(`https://sandbox.clicksign.com/api/v1/lists?access_token=${process.env.APIKEY}`, req.body)
   .then((res) => {
-    url = res.list.url;
+    url = res.data.list.url;
     status = res.status;
   })
   .catch((error) => {
     console.log(error);
+    // throw error;
     return res.status(error.response.status).send(error.response.data)
   });
   doc.url = url;
