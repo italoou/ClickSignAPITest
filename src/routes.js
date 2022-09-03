@@ -86,7 +86,7 @@ router.post('/signer', async (req, res) =>{
     console.log("arquivo salvo");
   });
 
-  return res.status(status).send(doc);
+  return res.redirect(url);
 })
 
 module.exports = router
