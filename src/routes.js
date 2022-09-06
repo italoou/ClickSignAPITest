@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const axios = require('axios');
 const fs = require('fs');
-const { Sequelize, DataTypes } = require('sequelize');
+// const { Sequelize, DataTypes } = require('sequelize');
 
 
 router.get('/', async (req, res) => {
