@@ -76,7 +76,7 @@ router.post('/modelos', async (req, res) => {
   //   console.log(error);
   // })
   
-  // const documento = await fs.writeFileSync('src/database.json', JSON.stringify(obj));
+  const documento = await fs.writeFileSync('src/database.json', JSON.stringify(obj));
 
   return res.status(status).send(retorno);
 })
