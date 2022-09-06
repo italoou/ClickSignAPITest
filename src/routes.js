@@ -86,8 +86,10 @@ router.post('/assinar', async (req, res) => {
   const signer = req.body.event.data.signer
   let doc = JSON.parse(documento);
   console.log(req.body);
-  doc.assinado = true;
-  doc.signer = signer;
+  if(doc.id == req.body.document.key){
+    doc.assinado = true;
+    doc.signer = signer;
+  }
   
   await fs.writeFile('src/database.json', JSON.stringify(doc), (err) => {
     if(err) throw err;
