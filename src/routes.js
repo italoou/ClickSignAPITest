@@ -64,6 +64,7 @@ router.post('/modelos', async (req, res) => {
     id = res.data.document.key;
   })
   .catch((error) => {
+    console.log(error);
     return res.status(error.response.status).send(error.response.data)
   });
 
