@@ -8,7 +8,10 @@ app.use(cors());
 
 app.use(express.json());
 
+app.set('view engine', 'ejs');
+
 app.use(router);
+
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`ClickSignApiTest Server is running on http://localhost:${PORT}`));
