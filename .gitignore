@@ -1,5 +1,6 @@
-node_modules
+/node_modules
 .env
-extra
-models
+src/extra
+src/models
 Database.db
+/uploads
