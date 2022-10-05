@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- <p>texto:</p>
+  <input id="texto"> 
+  <button>criar contrato</button> -->
+  <form method="post" action="/signer">
+    <label>signer_key</label>
+    <select id="signer_key" name="signer_key">
+      <option value='' ></option>
+      <option value="<%= signers[0].signer_key %>">ItaloTWD</option>
+      <option value="<%= signers[0].signer_key %>">ItaloITLIMA</option>
+    </select>
+    <label for="document_key">document_key</label>
+    <input type="text" name="document_key" id="document_key" value="<%= document_key %>" style="width:500px">
+    <!-- <input type="text" name="signer_key" id="signer_key"> -->
+    <button type="submit" id="enviar">solicitar assinatura</button>
+  </form>
+
+</body>
+</html></html>

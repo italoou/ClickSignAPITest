@@ -8,10 +8,31 @@
 </head>
 <body>
   <h1> <%= nameApp %></h1>
-  <h2> <%= APITest %></h2>
+  <!-- <h2> <%= APITest %></h2> -->
 
-  <p>texto:</p>
+  <!-- <p>texto:</p>
   <input id="texto"> 
-  <button>criar contrato</button>
+  <button>criar contrato</button> -->
+  <div style="margin: 2rem">
+  <form method="post" action="/uploadfile" enctype="multipart/form-data">
+    <input type="file" id="file" name="contrato">
+    <br>
+    <button type="submit" id="enviar">Enviar Arquivo</button>
+  </form>
+</div>
+<div style="margin: 2rem">
+  <form method="post" action="/modelos">
+    <input type="text" id="textocontrato" name="textocontrato">
+    <br>
+    <button type="submit" id="enviar">Criar Arquivo</button>
+  </form>
+</div>
+  <!-- <script> -->
+    <!-- $('#enviar').click(function(e) { -->
+        <!-- e.preventDefault(); -->
+        <!-- $('#form-solicitar').submit(); -->
+        <!-- $('#submit-form').attr('disabled', true); -->
+    <!-- }); -->
+<!-- </script> -->
 </body>
 </html></html>
