@@ -8,8 +8,8 @@
         <% for (const signer of contrato.signers) { %>
           <p> assinado: <%= signer.assinado %> </p>
           
-          <% if(signer.event.data.signers[0].key != null) { %>
-            <p> signer: <%= signer.event.data.signers[0].key %> </p>
+          <% if(signer.key != null) { %>
+            <p> signer: <%= signer.key %> </p>
           <% } %>
         <% } %>
       </p>

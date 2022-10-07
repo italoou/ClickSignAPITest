@@ -147,7 +147,7 @@ router.post('/modelos', async (req, res) => {
 
 router.post('/assinar', async (req, res) => {
   const documento = await fs.readFileSync('src/database.json', 'utf8');
-  const signer = req.body.event.data.signer
+  const signer = req.body.event.data.signers[0]
   let doc = JSON.parse(documento);
   
   doc.forEach(element => {
