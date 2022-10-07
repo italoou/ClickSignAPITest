@@ -12,13 +12,13 @@
 
     <!-- <input id="request" /> -->
     <input type="button" value="Load" onclick="run()" />
-    <input type="button" value="close" onclick="widget.unmount()" />
+    <input type="button" value="close" onclick="location.assign(widget.origin)" />
     
     <div id="container" style="height: 600px"></div>
 
     <!-- <script src='..\src\embedded.js'></script> -->
 
-    <script type="">
+    <script type="text/javascript">
       function Clicksign(i) {
         "use strict";
         function n(n) {
@@ -78,11 +78,11 @@
         widget = new Clicksign(request_signature_key);
 
         widget.endpoint = 'https://sandbox.clicksign.com';
-        widget.origin = 'https://google.com';
+        widget.origin = 'https://click-sign.herokuapp.com/';
         widget.mount('container');
 
         widget.on('loaded', function(ev) { console.log('loaded!'); });
-        widget.on('signed', function(ev) { console.log('signed!'); return widget.unmount();});
+        widget.on('signed', function(ev) { console.log('signed!'); widget.unmount();});
         widget.on('resized', function(height) {
           console.log('resized!');
           document.getElementById('container').style.height = height+'px';
