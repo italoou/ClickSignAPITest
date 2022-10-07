@@ -147,15 +147,15 @@ router.post('/modelos', async (req, res) => {
 
 router.post('/assinar', async (req, res) => {
   const documento = await fs.readFileSync('src/database.json', 'utf8');
-  console.log(req.body.event.data)
   const signer = req.body.event.data.signer
   let doc = JSON.parse(documento);
   
-  doc.forEach(element => {
-    if(element.id === req.body.document.key){
-      element.signers.push({assinado: true, signer})
+  
+  for(const d of doc){
+    if(d.id === req.body.document.key){
+      d.signers.push({assinado: true, signer})
     }
-  });
+  };
   
   await fs.writeFile('src/database.json', JSON.stringify(doc), (err) => {
     if(err) throw err;
@@ -168,7 +168,6 @@ router.post('/assinar', async (req, res) => {
 router.get('/banco', async (req, res) =>{
   const documento = await fs.readFileSync('src/database.json', 'utf8');
   let doc = JSON.parse(documento);
-  console.log(doc);
   return res.status(200).render('banco', {contratos: doc});
 })
 
