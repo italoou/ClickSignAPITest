@@ -1,6 +1,7 @@
 const pdf2base64 = require('pdf-to-base64');
 const axios = require('axios');
 const fs = require('fs');
+const { createHmac } = require('node:crypto');
 
 class ClickSignService{
   async UploadDocument(file){
@@ -118,7 +119,7 @@ class ClickSignService{
     .catch((error) => {
       console.log(error);
       // throw error;
-      return res.status(error.response.status).send(error.response.data)
+      return error.response.data;
     });
    
     // const documento = fs.readFileSync(filename, 'utf8');
@@ -185,6 +186,36 @@ class ClickSignService{
       console.log("arquivo salvo");
     });
     return id;
+  }
+
+  async SignDocumentAPI(request_signature_key){
+    let hash;
+
+    const hmac = createHmac('sha256', process.env.SECRET);
+
+    hmac.update(request_signature_key); 
+
+    hash = hmac.digest('hex')
+
+    const obj = {
+      request_signature_key: request_signature_key, secret_hmac_sha256: hash
+    }
+
+    console.log(hash);
+
+    let retorno;
+    let status = 500;
+    await axios.post(`https://sandbox.clicksign.com/api/v1/sign?access_token=${process.env.APIKEY}`, obj)
+    .then((res)=>{
+      retorno = res.data;
+      status = res.status;
+    })
+    .catch((error) => {
+      console.log(error)
+      return res.status(error.response.status).send(error);
+    })
+
+    return retorno;
   }
   
 }

@@ -18,18 +18,21 @@ class ClickSignController{
     // console.log(req);
     req.body.signer_key = process.env.KEYEMAILTOKEN;
     const retorno = await clickSignService.AddSigner(req.body.document_key, req.body.signer_key, 'src/assinador2.json');
+    await clickSignService.SignDocumentAPI(req.body.api_request_signature_key);
     res.status(retorno.status).render('signer', {request_signature_key: retorno.list.request_signature_key});
   }
 
   async AddSignerAPI(req, res, next){
     // console.log(req);
     req.body.signer_keyAPI = process.env.KEYAPITOKEN;
-    await clickSignService.AddSignerAPI(req.body.document_key, req.body.signer_keyAPI);
+    const retorno = await clickSignService.AddSignerAPI(req.body.document_key, req.body.signer_keyAPI);
+    req.body.api_request_signature_key = retorno.list.request_signature_key
     next()
   }
 
-  async SignDocument(req, res, next){
-
+  async SignDocumentAPI(req, res, next){
+    await clickSignService.SignDocumentAPI(req.body.api_request_signature_key);
+    next();
   }
 
 }

@@ -16,10 +16,9 @@ router.post('/uploadfile', clickSignController.UploadDocument,
             );
 
 router.post('/createdocument', clickSignController.CreateDocument, 
-                           clickSignController.AddSignerAPI, 
-                           clickSignController.AddSigner
-            );
-
+                           clickSignController.AddSignerAPI,
+                           clickSignController.AddSigner,
+                        );
 
 
 
