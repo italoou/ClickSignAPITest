@@ -5,11 +5,11 @@
     <% for (const contrato of contratos) { %>
       <p>
         <%= contrato.id %><br>
-        <% if(contrato.signers != null) { %>
+        <!-- <% if(contrato.signers != null) { %> -->
         <% for (const signer of contrato.signers) { %>
           <p> assinado: <%= signer.assinado %> </p>
-          <p> signer: <%= signer.event.data.signers[0].key %> </p>
-        <% } %>
+          <p> signer: <%= signer %> </p>
+        <!-- <% } %> -->
         <% } %>
       </p>
     <% } %>
