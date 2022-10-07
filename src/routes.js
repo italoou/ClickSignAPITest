@@ -167,6 +167,7 @@ router.post('/assinar', async (req, res) => {
 router.get('/banco', async (req, res) =>{
   const documento = await fs.readFileSync('src/database.json', 'utf8');
   let doc = JSON.parse(documento);
+  console.log(doc);
   return res.status(200).render('banco', {contratos: doc});
 })
 
