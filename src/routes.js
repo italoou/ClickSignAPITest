@@ -10,14 +10,18 @@ const { fileLoader } = require('ejs');
 const clickSignController = require('../src/controllers/ClickSignController');
 // const { Sequelize, DataTypes } = require('sequelize');
 
-router.post('/uploadfile', clickSignController.UploadDocument, async (req, res, next) => {
-  await clickSignController.AddSigner( req.body.document_key, process.env.KEYAPITOKEN);
-  const retorno = await clickSignController.AddSigner(req.body.document_key, process.env.KEYEMAILTOKEN);
-  // console.log(retorno);
-  // res.send(retorno);
-  return res.status(retorno.status).render('signer', {request_signature_key: retorno.list.request_signature_key});
-}, );
-// router.post('/uploadfile', clickSignController.ideia);
+router.post('/uploadfile', clickSignController.UploadDocument, 
+                           clickSignController.AddSignerAPI, 
+                           clickSignController.AddSigner
+            );
+
+router.post('/createdocument', clickSignController.CreateDocument, 
+                           clickSignController.AddSignerAPI, 
+                           clickSignController.AddSigner
+            );
+
+
+
 
 router.get('/', async (req, res) => {
   let text;
@@ -145,11 +149,12 @@ router.post('/assinar', async (req, res) => {
   const documento = await fs.readFileSync('src/database.json', 'utf8');
   const signer = req.body.event.data.signer
   let doc = JSON.parse(documento);
-  console.log(req.body);
-  if(doc.id == req.body.document.key){
-    doc.assinado = true;
-    doc.signer = signer;
-  }
+  
+  doc.forEach(element => {
+    if(element.id === req.body.document.key){
+      element.signers.push({assinado: true, signer})
+    }
+  });
   
   await fs.writeFile('src/database.json', JSON.stringify(doc), (err) => {
     if(err) throw err;
