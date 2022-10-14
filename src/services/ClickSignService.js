@@ -217,6 +217,40 @@ class ClickSignService{
 
     return retorno;
   }
+
+  async CreateSigner(email, cpf, dtNasc){
+
+    const obj = {
+      signer:{
+        email: email,
+        auths: [
+          "email"
+        ],
+        documentation: cpf,
+        birthday: dtNasc,
+        has_documentation: true,
+        selfie_enabled: false,
+        handwritten_enabled: false,
+        official_document_enabled: false,
+        liveness_enabled: false,
+        facial_biometrics_enabled: false
+      }
+    }
+
+    let retorno;
+    let status = 500;
+    await axios.post(`https://sandbox.clicksign.com/api/v1/signers?access_token=${process.env.APIKEY}`, obj)
+    .then((res)=>{
+      retorno = res.data;
+      status = res.status;
+    })
+    .catch((error) => {
+      console.log(error.response.data)
+      return "erro";
+    })
+
+    return retorno;
+  }
   
 }
 

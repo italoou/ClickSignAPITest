@@ -11,14 +11,18 @@ const clickSignController = require('../src/controllers/ClickSignController');
 // const { Sequelize, DataTypes } = require('sequelize');
 
 router.post('/uploadfile', clickSignController.UploadDocument, 
+                           clickSignController.CreateSigner,
                            clickSignController.AddSignerAPI, 
                            clickSignController.AddSigner
             );
 
 router.post('/createdocument', clickSignController.CreateDocument, 
-                           clickSignController.AddSignerAPI,
-                           clickSignController.AddSigner,
-                        );
+                               clickSignController.CreateSigner,
+                               clickSignController.AddSignerAPI,
+                               clickSignController.AddSigner,
+            );
+
+router.post('/testsigner', clickSignController.CreateSigner)                    
 
 
 
